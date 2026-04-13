@@ -2,6 +2,14 @@
 
 AI 驱动的社媒文案助手，选中即用，一键生成。
 
+
+<img width="2560" height="1272" alt="c8397780700b482eb50305b926a2ceeb" src="https://github.com/user-attachments/assets/295dd600-5bdd-4ccf-9b85-aac224af96c5" />
+<img width="1795" height="928" alt="9aed3c21890049d791c25b3be419700e" src="https://github.com/user-attachments/assets/6f4d820c-167a-4f33-81ac-c88d0a97d6c4" />
+<img width="2560" height="1272" alt="17e9e52151ae4ed396fc181153804cf2" src="https://github.com/user-attachments/assets/3b82d9ee-7b2e-4f05-ac6f-94cb3b62ad73" />
+<img width="2540" height="1272" alt="e1b6d5c89e0c4cf6b4cdb600d94af61c" src="https://github.com/user-attachments/assets/b899c5fc-a7f8-4eae-9831-063589df9281" />
+<img width="2540" height="1274" alt="34f27ec14e4c4e25b05ccabe58358583" src="https://github.com/user-attachments/assets/4b9ed8a3-7104-4fef-8671-eb07c349e793" />
+
+
 ## 功能
 
 - 🖱️ 选中网页文本，一键生成 AI 改写内容
