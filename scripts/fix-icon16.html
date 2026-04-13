@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>修复 16x16 图标</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 40px;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 32px;
+      border-radius: 12px;
+    }
+    h1 { margin: 0 0 16px 0; }
+    .icon-preview {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      margin: 24px 0;
+      padding: 24px;
+      background: #f5f5f5;
+      border-radius: 8px;
+    }
+    canvas {
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      image-rendering: pixelated;
+    }
+    .label {
+      text-align: center;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+    button {
+      background: #0A0A0A;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 16px;
+    }
+    button:hover { background: #262626; }
+    .instructions {
+      background: #e8f4fd;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 16px 0;
+      border-left: 4px solid #0EA5E9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>⚡ 修复工具栏图标（16x16）</h1>
+
+    <div class="instructions">
+      <strong>问题：</strong>16x16 图标在工具栏中太小，闪电图案看不清<br>
+      <strong>解决：</strong>生成高对比度简化版本
+    </div>
+
+    <div class="icon-preview">
+      <div>
+        <canvas id="icon16" width="16" height="16"></canvas>
+        <div class="label">16 x 16</div>
+      </div>
+      <div>
+        <canvas id="icon16_preview" width="64" height="64"></canvas>
+        <div class="label">预览（4x 放大）</div>
+      </div>
+    </div>
+
+    <button onclick="downloadIcon()">下载 icon16.png</button>
+    <p style="margin-top: 16px; color: #666; font-size: 14px;">
+      下载后替换 E:\play\idea\dist\icons\icon16.png
+    </p>
+  </div>
+
+  <script>
+    function generateIcon16() {
+      const canvas = document.getElementById('icon16');
+      const ctx = canvas.getContext('2d');
+      const preview = document.getElementById('icon16_preview');
+      const previewCtx = preview.getContext('2d');
+
+      // 清除
+      ctx.clearRect(0, 0, 16, 16);
+      previewCtx.clearRect(0, 0, 64, 64);
+
+      // 白色背景（圆角）
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.roundRect(0, 0, 16, 16, 4);
+      ctx.fill();
+
+      // 黑色闪电 - 简化粗线条版本
+      ctx.fillStyle = '#0A0A0A';
+      ctx.beginPath();
+      ctx.moveTo(9, 2);
+      ctx.lineTo(5, 9);
+      ctx.lineTo(8, 9);
+      ctx.lineTo(7, 14);
+      ctx.lineTo(12, 7);
+      ctx.lineTo(8, 7);
+      ctx.closePath();
+      ctx.fill();
+
+      // 绘制预览（4x 放大）
+      previewCtx.imageSmoothingEnabled = false;
+      previewCtx.drawImage(canvas, 0, 0, 64, 64);
+    }
+
+    function downloadIcon() {
+      const canvas = document.getElementById('icon16');
+      const link = document.createElement('a');
+      link.download = 'icon16.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    // 页面加载时生成
+    generateIcon16();
+  </script>
+</body>
+</html>

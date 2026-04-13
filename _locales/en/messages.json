@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "ContentCraft AI",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Select text and instantly rewrite with AI to generate social media copy with one click",
+    "description": "Description of the extension"
+  },
+  "commandGenerateContent": {
+    "message": "Generate AI Content",
+    "description": "Description of the keyboard shortcut command"
+  }
+}

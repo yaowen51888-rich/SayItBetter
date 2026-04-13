@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>生成高对比度 16x16 图标</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 20px;
+      display: flex;
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    canvas {
+      border: 2px solid #333;
+      border-radius: 4px;
+      image-rendering: pixelated;
+    }
+    button {
+      background: #0A0A0A;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .preview {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+      padding: 10px;
+      background: #f5f5f5;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>选项 1: 纯黑闪电（高对比）</h2>
+    <canvas id="icon1" width="16" height="16"></canvas>
+    <div class="preview">
+      <canvas id="icon1_preview" width="64" height="64" style="border:2px solid #ddd"></canvas>
+      <span>4x 预览</span>
+    </div>
+    <button onclick="saveIcon('icon1', 'icon16.png')">下载</button>
+  </div>
+
+  <div class="card">
+    <h2>选项 2: 粗闪电（更清晰）</h2>
+    <canvas id="icon2" width="16" height="16"></canvas>
+    <div class="preview">
+      <canvas id="icon2_preview" width="64" height="64" style="border:2px solid #ddd"></canvas>
+      <span>4x 预览</span>
+    </div>
+    <button onclick="saveIcon('icon2', 'icon16.png')">下载</button>
+  </div>
+
+  <div class="card">
+    <h2>选项 3: 实心方块（最可见）</h2>
+    <canvas id="icon3" width="16" height="16"></canvas>
+    <div class="preview">
+      <canvas id="icon3_preview" width="64" height="64" style="border:2px solid #ddd"></canvas>
+      <span>4x 预览</span>
+    </div>
+    <button onclick="saveIcon('icon3', 'icon16.png')">下载</button>
+  </div>
+
+  <script>
+    // 选项 1: 纯黑闪电
+    function drawIcon1(ctx) {
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, 16, 16);
+      ctx.fillStyle = '#0A0A0A';
+      // 简化闪电
+      ctx.beginPath();
+      ctx.moveTo(10, 2);
+      ctx.lineTo(5, 10);
+      ctx.lineTo(9, 10);
+      ctx.lineTo(7, 14);
+      ctx.lineTo(13, 7);
+      ctx.lineTo(9, 7);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // 选项 2: 粗闪电（像素级优化）
+    function drawIcon2(ctx) {
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, 16, 16);
+      ctx.fillStyle = '#0A0A0A';
+      // 像素闪电 - 每个像素
+      const pixels = [
+        [8,2],[9,2],[7,3],[10,3],[7,4],[10,4],[6,5],[11,5],[5,6],[6,7],[7,7],[8,7],[5,8],[6,8],[4,9],[5,9],[6,9],[4,10],[5,10],[7,11],[8,11],[9,11],[8,12],[9,12],[10,13],[11,13],[11,14]
+      ];
+      pixels.forEach(([x,y]) => ctx.fillRect(x, y, 1, 1));
+    }
+
+    // 选项 3: 实心方块（最可见）
+    function drawIcon3(ctx) {
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, 16, 16);
+      // 黑色边框
+      ctx.fillStyle = '#0A0A0A';
+      ctx.fillRect(0, 0, 16, 2);
+      ctx.fillRect(0, 0, 2, 16);
+      ctx.fillRect(14, 0, 2, 16);
+      ctx.fillRect(0, 14, 16, 2);
+      // 中心闪电符号
+      ctx.beginPath();
+      ctx.moveTo(10, 4);
+      ctx.lineTo(6, 10);
+      ctx.lineTo(9, 10);
+      ctx.lineTo(8, 12);
+      ctx.lineTo(12, 8);
+      ctx.lineTo(9, 8);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    function init() {
+      ['icon1', 'icon2', 'icon3'].forEach(id => {
+        const canvas = document.getElementById(id);
+        const preview = document.getElementById(id + '_preview');
+        const ctx = canvas.getContext('2d');
+        const previewCtx = preview.getContext('2d');
+
+        if (id === 'icon1') drawIcon1(ctx);
+        else if (id === 'icon2') drawIcon2(ctx);
+        else drawIcon3(ctx);
+
+        previewCtx.imageSmoothingEnabled = false;
+        previewCtx.drawImage(canvas, 0, 0, 64, 64);
+      });
+    }
+
+    function saveIcon(canvasId, filename) {
+      const canvas = document.getElementById(canvasId);
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    init();
+  </script>
+</body>
+</html>

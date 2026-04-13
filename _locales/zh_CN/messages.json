@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "ContentCraft AI",
+    "description": "扩展名称"
+  },
+  "extensionDescription": {
+    "message": "选中即用 AI 改写，一键生成社媒文案",
+    "description": "扩展描述"
+  },
+  "commandGenerateContent": {
+    "message": "生成 AI 内容",
+    "description": "快捷键命令描述"
+  }
+}

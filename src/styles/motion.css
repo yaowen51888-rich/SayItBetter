@@ -1,0 +1,403 @@
+/**
+ * 科技动态元素配置
+ * 遵循 OpenAI 极简风格：克制、功能性、性能优先
+ */
+
+export const motionTokens = {
+  // ========== 微交互动画 ==========
+
+  // 按钮悬停 - 轻微上移
+  buttonHover: {
+    transform: 'translateY(-1px)',
+    duration: 150,
+  },
+
+  // 卡片进入 - 淡入 + 上移
+  cardEnter: {
+    from: { opacity: 0, transform: 'translateY(8px)' },
+    to: { opacity: 1, transform: 'translateY(0)' },
+    duration: 200,
+    easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+  },
+
+  // ========== 功能性动画 ==========
+
+  // 加载状态 - AI 脉冲效果（克制版）
+  aiPulse: {
+    duration: 2000,
+    keyframes: [
+      { opacity: 0.4, transform: 'scale(1)' },
+      { opacity: 1, transform: 'scale(1.02)' },
+      { opacity: 0.4, transform: 'scale(1)' },
+    ],
+  },
+
+  // 处理中 - 渐进式条（替代旋转 loading）
+  processing: {
+    duration: 1500,
+    easing: 'ease-in-out',
+  },
+
+  // ========== 状态反馈 ==========
+
+  // 成功 - 绿色闪烁（快速）
+  success: {
+    duration: 300,
+    keyframes: [
+      { backgroundColor: '#22C55E' },
+      { backgroundColor: '#FFFFFF' },
+    ],
+  },
+
+  // 错误 - 红色闪烁（快速）
+  error: {
+    duration: 300,
+    keyframes: [
+      { backgroundColor: '#EF4444' },
+      { backgroundColor: '#FFFFFF' },
+    ],
+  },
+
+  // ========== 科技感元素 ==========
+
+  // AI 思考动画 - 三个点依次出现（非常克制）
+  aiThinking: {
+    dots: 3,
+    duration: 1200,
+    color: '#0A0A0A',
+  },
+
+  // 数据流 - 细线条移动（仅用于数据传输场景）
+  dataFlow: {
+    duration: 1000,
+    color: '#E5E5E5',
+    width: 2,
+  },
+
+  // 光标闪烁 - 仅用于输入提示
+  cursorBlink: {
+    duration: 1000,
+  },
+}
+
+// CSS 动画实现
+export const motionCSS = `
+  /* ========== 微交互动画 ========== */
+
+  .hover-lift {
+    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-1px);
+  }
+
+  /* ========== AI 思考动画（克制版） ========== */
+
+  .ai-thinking {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+  }
+
+  .ai-thinking-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #0A0A0A;
+    opacity: 0.4;
+    animation: thinkingDot 1.2s infinite;
+  }
+
+  .ai-thinking-dot:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .ai-thinking-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .ai-thinking-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes thinkingDot {
+    0%, 80%, 100% {
+      opacity: 0.4;
+    }
+    40% {
+      opacity: 1;
+    }
+  }
+
+  /* ========== 处理进度条（替代旋转） ========== */
+
+  .progress-bar {
+    height: 2px;
+    background: #E5E5E5;
+    border-radius: 1px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 30%;
+    background: #0A0A0A;
+    border-radius: 1px;
+    animation: progressSlide 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes progressSlide {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(400%);
+    }
+  }
+
+  /* ========== 数据传输动画（极少使用） ========== */
+
+  .data-flow {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .data-flow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      #0A0A0A,
+      transparent
+    );
+    animation: dataFlow 1s linear infinite;
+  }
+
+  @keyframes dataFlow {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  /* ========== 脉冲效果（AI 处理中） ========== */
+
+  .ai-pulse {
+    animation: aiPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes aiPulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.01);
+    }
+  }
+
+  /* ========== 光标闪烁 ========== */
+
+  .cursor-blink::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* ========== 状态反馈动画 ========== */
+
+  .flash-success {
+    animation: flashSuccess 300ms ease-out;
+  }
+
+  @keyframes flashSuccess {
+    0% {
+      background-color: #FFFFFF;
+    }
+    10% {
+      background-color: #F0FDF4;
+    }
+    100% {
+      background-color: #FFFFFF;
+    }
+  }
+
+  .flash-error {
+    animation: flashError 300ms ease-out;
+  }
+
+  @keyframes flashError {
+    0% {
+      background-color: #FFFFFF;
+    }
+    10% {
+      background-color: #FEF2F2;
+    }
+    100% {
+      background-color: #FFFFFF;
+    }
+  }
+
+  /* ========== 浮窗进入动画 ========== */
+
+  .popup-enter {
+    animation: popupEnter 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes popupEnter {
+    from {
+      opacity: 0;
+      transform: translateY(4px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* ========== 内容展开动画 ========== */
+
+  .content-expand {
+    animation: contentExpand 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes contentExpand {
+    from {
+      opacity: 0;
+      max-height: 0;
+    }
+    to {
+      opacity: 1;
+      max-height: 200px;
+    }
+  }
+
+  /* ========== 微妙的光晕效果（仅用于强调） ========== */
+
+  .glow-subtle {
+    box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.05);
+    transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glow-subtle:focus {
+    box-shadow: 0 0 0 2px rgba(10, 10, 10, 0.08),
+                0 0 0 4px rgba(10, 10, 10, 0.04);
+  }
+
+  /* ========== 科技感边框动画 ========== */
+
+  .tech-border {
+    position: relative;
+  }
+
+  .tech-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(10, 10, 10, 0.1) 0%,
+      rgba(10, 10, 10, 0) 50%,
+      rgba(10, 10, 10, 0.1) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tech-border:hover::before,
+  .tech-border:focus-within::before {
+    opacity: 1;
+  }
+
+  /* ========== 极光效果（仅用于特殊场景） ========== */
+
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 200%;
+    }
+  }
+
+  /* ========== 打字机效果（仅用于 AI 输出） ========== */
+
+  .typewriter {
+    overflow: hidden;
+    border-right: 2px solid #0A0A0A;
+    white-space: nowrap;
+    animation: typing 0.5s steps(20, end),
+             blink-caret 0.75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+  }
+  50% {
+    border-color: #0A0A0A;
+  }
+}
+
+export default motionCSS

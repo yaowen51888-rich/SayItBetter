@@ -1,0 +1,329 @@
+// 用户设置
+export interface UserSettings {
+  defaultProvider: AIProvider
+  apiKey: string
+  defaultStyle: string
+  defaultPlatform: string
+  customApiUrl?: string // 自定义 API 端点
+  enableHumanize?: boolean // 是否启用人性化处理（去除 AI 写作痕迹）
+}
+
+// AI 提供商类型
+export type AIProvider =
+  | 'openai'        // OpenAI (GPT-4)
+  | 'claude'        // Anthropic (Claude)
+  | 'qwen'          // 阿里通义千问
+  | 'glm'           // 智谱 GLM
+  | 'wenxin'        // 百度文心一言
+  | 'kimi'          // 月之暗面 Kimi
+  | 'deepseek'      // DeepSeek
+  | 'doubao'        // 火山云豆包
+  | 'custom'        // 自定义 API
+
+// 风格模板
+export interface UserStyle {
+  id: string
+  name: string
+  prompt: string
+}
+
+// 平台模板
+export interface PlatformTemplate {
+  maxLength: number
+  promptTemplate: string
+}
+
+// 历史记录
+export interface HistoryItem {
+  id: string
+  timestamp: string
+  originalText: string
+  generatedText: string
+  platform: string
+  style: string
+  provider: string
+  tokensUsed: number
+}
+
+// 使用统计
+export interface UsageStats {
+  totalGenerations: number
+  totalTokens: number
+  lastUsed: string | null
+}
+
+/**
+ * @deprecated 买断制模式下无配额限制，此接口仅用于向后兼容
+ * 用户自备 API Key，使用量不受限制
+ */
+export interface TokenQuota {
+  dailyLimit: number // 0 表示无限制
+  dailyUsed: number
+  dailyResetAt: string // ISO时间戳
+  monthlyLimit: number // 0 表示无限制
+  monthlyUsed: number
+  monthlyResetAt: string
+}
+
+// 用户账号类型（买断制）
+export type UserTier = 'free' | 'premium' | 'enterprise'
+
+/**
+ * 功能权限（买断制模式）
+ *
+ * 免费版：用户自备 API Key，无使用限制，基础功能
+ * 买断版（premium）：一次性购买，获得高级功能
+ * 企业版（enterprise）：团队协作功能
+ */
+export interface FeaturePermissions {
+  // === 基础功能 ===
+  maxStyles: number
+  canCreateCustomStyle: boolean
+  hasBatchProcessing: boolean
+
+  // === 买断版高级功能 ===
+  hasSmartCache: boolean        // 智能缓存：重复内容秒级响应
+  hasModelRouting: boolean      // 智能路由：自动选择最优模型
+  hasABGeneration: boolean      // AB测试（暂未实现）
+  maxBatchSize: number          // 批量处理最大条数
+  humanizeLevel: 'basic' | 'enhanced'  // 人性化处理级别
+  historyRetentionDays: number  // 历史记录保留天数（-1 表示无限）
+  hasCloudBackup: boolean       // 云端备份（暂未实现）
+  hasPrioritySupport: boolean   // 优先支持
+
+  // === 已废弃字段（保留用于向后兼容）===
+  /** @deprecated 已废弃 */
+  hasCloudSync: boolean
+  /** @deprecated 已废弃 */
+  hasPriorityModel: boolean
+}
+
+// 消息类型
+export type MessageType =
+  | 'GET_SELECTED_TEXT'
+  | 'SHOW_POPUP'
+  | 'HIDE_POPUP'
+  | 'GENERATE_CONTENT'
+  | 'CONTENT_RESULT'
+  | 'CONTENT_ERROR'
+  | 'GET_USER_SETTINGS'
+  | 'SAVE_USER_SETTINGS'
+  | 'GET_USER_STYLES'
+  | 'SAVE_USER_STYLES'
+  | 'GET_HISTORY'
+  | 'CLEAR_HISTORY'
+  | 'GET_QUOTA'
+  | 'GET_USER_TIER'
+  | 'SET_USER_TIER'
+  | 'GET_FEATURE_PERMISSIONS'
+  | 'CHECK_STYLE_AVAILABLE'
+  // === 以下为旧系统消息类型（将废弃）===
+  // 认证相关（废弃）
+  | 'AUTH_SIGN_UP'
+  | 'AUTH_SIGN_IN'
+  | 'AUTH_SIGN_OUT'
+  | 'AUTH_GET_CURRENT_USER'
+  | 'AUTH_RESET_PASSWORD'
+  // 支付相关（废弃）
+  | 'PAYMENT_CREATE_CHECKOUT'
+  | 'PAYMENT_CHECK_SUBSCRIPTION'
+  | 'PAYMENT_CANCEL_SUBSCRIPTION'
+  | 'PAYMENT_GET_PRICING'
+  // 云端同步相关（废弃）
+  | 'CLOUD_SYNC_HISTORY'
+  | 'CLOUD_FETCH_HISTORY'
+  | 'CLOUD_SYNC_STYLES'
+  | 'CLOUD_FETCH_STYLES'
+  | 'CLOUD_CHECK_SYNC_ENABLED'
+  // 国内认证相关（废弃）
+  | 'DOMESTIC_SEND_CODE'
+  | 'DOMESTIC_VERIFY_LOGIN'
+  // 国内支付相关（废弃）
+  | 'DOMESTIC_CREATE_PAYMENT'
+  | 'DOMESTIC_QUERY_PAYMENT'
+  // === 以下为新系统消息类型 ===
+  // 激活码相关（新增）
+  | 'LICENSE_VALIDATE'
+  | 'LICENSE_ACTIVATE'
+  | 'LICENSE_DEACTIVATE'
+  | 'LICENSE_GET_CURRENT'
+  | 'LICENSE_GET_DEVICE_ID'
+  | 'LICENSE_GET_DEVICE_SUMMARY'
+  | 'LICENSE_GET_DEVICES'
+  | 'LICENSE_REVOKE_DEVICE'
+  | 'OPEN_UPGRADE_TAB'  // 打开升级标签页
+  // 权限相关（新增）
+  | 'PERMISSION_GET_ALL'
+  | 'PERMISSION_CHECK'
+  // 缓存相关（新增）
+  | 'CACHE_GET'
+  | 'CACHE_SET'
+  | 'CACHE_CLEAR'
+  | 'CACHE_GET_STATS'
+  // 路由相关（新增）
+  | 'ROUTE_SELECT_MODEL'
+  | 'ROUTE_GET_STATS'
+  | 'ROUTE_RESET_STATS'
+  // 迁移相关（新增）
+  | 'MIGRATION_EXPORT_DATA'
+  | 'MIGRATION_IMPORT_DATA'
+
+export interface MessagePayload {
+  type: MessageType
+  data?: any
+}
+
+// AI 调用选项
+export interface AIOptions {
+  timeout?: number
+  maxRetries?: number
+  stream?: boolean
+  enableHumanize?: boolean // 是否启用人性化处理（去除 AI 写作痕迹），默认 true
+  model?: string // 指定模型
+}
+
+// ========== 激活码相关（新增）==========
+export interface LicensePayload {
+  iss: string
+  sub: string
+  iat: number
+  exp: number
+  tier: 'premium'
+  version: number
+  devices: string[]
+  max_devices?: number
+}
+
+export interface StoredLicense {
+  tier: UserTier
+  license: string
+  deviceId: string
+  activatedAt: string
+  lastValidated: string
+}
+
+export interface ActivationResult {
+  success: boolean
+  tier?: UserTier
+  error?: string
+  deviceCount?: number
+}
+
+// ========== 缓存相关（新增）==========
+export interface CacheInput {
+  input: string
+  style: string
+  platform: string
+  humanize: boolean
+}
+
+export interface CacheResult {
+  output: string
+  model: string
+  tokens: number
+}
+
+export interface CacheEntry {
+  key: string
+  inputHash: string
+  result: string
+  metadata: {
+    style: string
+    platform: string
+    model: string
+    tokens: number
+    cachedAt: number
+    hitCount: number
+    lastHitAt: number
+  }
+}
+
+export interface CacheStats {
+  totalEntries: number
+  hitCount: number
+  missCount: number
+  hitRate: number
+  tokensSaved: number
+}
+
+// ========== 路由相关（新增）==========
+export interface ComplexityScore {
+  total: number
+  factors: {
+    length: number
+    structure: number
+    vocabulary: number
+    domain: number
+  }
+  recommendation: 'haiku' | 'sonnet' | 'opus' | 'default'
+}
+
+export interface RoutingDecision {
+  input: {
+    text: string
+    style: string
+    provider: string
+    complexity: ComplexityScore
+  }
+  output: {
+    provider: string
+    model: string
+    confidence: number
+    reason: string[]
+  }
+}
+
+export interface RouterStats {
+  totalRequests: number
+  modelDistribution: Record<string, number>
+  averageConfidence: number
+}
+
+// ========== 迁移相关（新增）==========
+export interface MigrationExportData {
+  userId: string
+  email: string
+  exportDate: string
+  data: {
+    history: HistoryItem[]
+    customStyles: UserStyle[]
+    settings: UserSettings
+  }
+  format: 'json'
+  downloadUrl: string
+}
+
+export interface MigrationImportPlan {
+  targetStorage: {
+    history: 'IndexedDB'
+    customStyles: 'chrome.storage.local'
+    settings: 'chrome.storage.local'
+  }
+  importMethod: {
+    autoImport: boolean
+    manualImport: boolean
+    importUrl: string
+  }
+  validation: {
+    checkIntegrity: boolean
+    maxHistoryItems: number
+    maxCustomStyles: number
+  }
+}
+
+// ========== 功能开关（新增）==========
+export interface FeatureFlags {
+  useNewLicenseSystem: boolean
+  showMigrationNotice: boolean
+  oldSystemDisabled: boolean
+  enableSmartCache: boolean
+  enableModelRouting: boolean
+  enableABGeneration: boolean
+  enableBatchProcessing: boolean
+  enableEnhancedHumanize: boolean
+  enableUnlimitedHistory: boolean
+  enableCloudBackup: boolean
+  enableAdvancedPanel: boolean
+  enableRouterStats: boolean
+  enableCacheStats: boolean
+}
