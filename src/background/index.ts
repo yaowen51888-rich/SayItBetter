@@ -14,7 +14,7 @@ import { getHumanizeCacheStats, clearHumanizeCache } from './cache/humanize-cach
 
 const API_KEY_MASK_LENGTH = 8
 
-console.log('ContentCraft AI Background Service starting...')
+console.log('SayItBetter Background Service starting...')
 
 /**
  * 处理来自 Content Script 和 Popup 的消息
@@ -489,7 +489,7 @@ chrome.runtime.onStartup.addListener(async () => {
 
 // 安装时打开设置页并初始化（合并迁移逻辑）
 chrome.runtime.onInstalled.addListener(async (details) => {
-  console.log('ContentCraft AI installed')
+  console.log('SayItBetter installed')
 
   // 执行免费版迁移
   try {
@@ -513,7 +513,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 
   // 如果是更新，显示通知
   if (details.reason === 'update') {
-    console.log('[ContentCraft] 扩展已更新到免费版')
+    console.log('[SayItBetter] 扩展已更新到免费版')
   }
 })
 

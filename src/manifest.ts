@@ -14,7 +14,7 @@ const manifest = {
     'clipboardWrite',
     'alarms',
   ],
-  host_permissions: [
+  optional_host_permissions: [
     'https://api.openai.com/*',
     'https://api.anthropic.com/*',
     'https://dashscope.aliyuncs.com/*',
@@ -25,7 +25,7 @@ const manifest = {
     'https://ark.cn-beijing.volces.com/*',
   ],
   content_security_policy: {
-    extension_pages: "script-src 'self'; object-src 'self'; connect-src 'self' https://api.openai.com https://api.anthropic.com https://dashscope.aliyuncs.com https://open.bigmodel.cn https://aip.baidubce.com https://api.moonshot.cn https://api.deepseek.com https://ark.cn-beijing.volces.com;",
+    extension_pages: "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.openai.com https://api.anthropic.com https://dashscope.aliyuncs.com https://open.bigmodel.cn https://aip.baidubce.com https://api.moonshot.cn https://api.deepseek.com https://ark.cn-beijing.volces.com;",
   },
   background: {
     service_worker: 'src/background/index.ts',
@@ -33,7 +33,10 @@ const manifest = {
   },
   content_scripts: [
     {
-      matches: ['<all_urls>'],
+      matches: ['http://*/*', 'https://*/*'],
+      exclude_matches: [
+        'https://chrome.google.com/*',
+      ],
       js: ['src/content/index.ts'],
       css: ['src/content/styles.css'],
     },

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SayItBetter 隐私政策</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      color: #1f2937;
+      line-height: 1.7;
+    }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    h2 { font-size: 18px; margin-top: 32px; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; }
+    p { margin: 12px 0; }
+    .updated { color: #6b7280; font-size: 14px; margin-bottom: 24px; }
+  </style>
+</head>
+<body>
+  <h1>SayItBetter 隐私政策</h1>
+  <p class="updated">最后更新：2026 年 4 月 19 日</p>
+
+  <h2>概述</h2>
+  <p>SayItBetter 是一款浏览器扩展，帮助用户将选中的文本通过 AI 改写为适合社交媒体平台的文案。我们高度重视您的隐私。</p>
+
+  <h2>数据收集</h2>
+  <p>SayItBetter <strong>不收集任何个人数据</strong>。我们不使用 Cookie、不使用分析工具、不使用遥测技术。</p>
+
+  <h2>数据存储</h2>
+  <p>所有设置（包括您自行配置的 API Key）和历史记录仅存储在浏览器本地（chrome.storage.local 和 IndexedDB），不会发送到任何第三方服务器。</p>
+
+  <h2>API 调用</h2>
+  <p>当您使用文本改写功能时，选中的文本将直接从您的浏览器发送到您选择的 AI 服务提供商（如 OpenAI、Anthropic、DeepSeek 等）。API 调用由您自行配置的 API Key 驱动，我们不做任何中间处理或转发。</p>
+
+  <h2>第三方服务</h2>
+  <p>SayItBetter 可能连接以下第三方 AI 服务（取决于您的配置）：</p>
+  <ul>
+    <li>OpenAI (api.openai.com)</li>
+    <li>Anthropic (api.anthropic.com)</li>
+    <li>阿里云通义千问 (dashscope.aliyuncs.com)</li>
+    <li>智谱 GLM (open.bigmodel.cn)</li>
+    <li>百度文心 (qianfan.baidubce.com)</li>
+    <li>Moonshot Kimi (api.moonshot.cn)</li>
+    <li>DeepSeek (api.deepseek.com)</li>
+    <li>火山引擎 (ark.cn-beijing.volces.com)</li>
+  </ul>
+  <p>各服务的隐私政策请参阅其官方网站。</p>
+
+  <h2>内容脚本</h2>
+  <p>SayItBetter 仅在您主动选中文本并触发操作时才会处理页面内容。扩展不会在后台监控或记录您的浏览行为。</p>
+
+  <h2>权限说明</h2>
+  <ul>
+    <li><strong>storage</strong> — 存储您的设置和历史记录</li>
+    <li><strong>activeTab</strong> — 获取当前标签页选中的文本</li>
+    <li><strong>clipboardWrite</strong> — 将生成的文案复制到剪贴板</li>
+    <li><strong>alarms</strong> — 定期清理过期历史记录</li>
+    <li><strong>可选主机权限</strong> — 仅在您配置对应 AI 服务时按需请求</li>
+  </ul>
+
+  <h2>变更通知</h2>
+  <p>如果本隐私政策发生变更，我们将在此页面更新最新日期。</p>
+
+  <h2>联系方式</h2>
+  <p>如有隐私相关问题，请通过 Chrome Web Store 扩展页面联系开发者。</p>
+</body>
+</html>

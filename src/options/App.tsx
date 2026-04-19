@@ -129,7 +129,7 @@ export function App() {
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M13 2L3 14H8L11 22L21 10H16L13 2Z" fill="currentColor"/>
           </svg>
-          <h1>ContentCraft</h1>
+          <h1>SayItBetter</h1>
           <span className="free-badge">完全免费</span>
         </div>
         <p className="header-subtitle">AI 文案生成助手</p>
@@ -190,7 +190,7 @@ export function App() {
                 }}>🔑</div>
                 <h2 style={{ margin: '0 0 8px', fontSize: '18px' }}>开始使用</h2>
                 <p style={{ margin: '0 0 20px', color: '#737373', fontSize: '14px' }}>
-                  添加您的第一个API配置即可开始使用ContentCraft
+                  添加您的第一个API配置即可开始使用SayItBetter
                 </p>
                 <button
                   onClick={() => setShowProfileManager(true)}
@@ -804,12 +804,12 @@ export function App() {
 function AboutPanel() {
   return (
     <div className="section">
-      <h2>关于 ContentCraft</h2>
+      <h2>关于 SayItBetter</h2>
 
       <div className="about-content">
         <div className="about-section">
           <h3>版本信息</h3>
-          <p>ContentCraft v1.0.0 (免费版)</p>
+          <p>SayItBetter v1.0.0 (免费版)</p>
           <p className="help">所有功能完全免费，永久使用</p>
         </div>
 
@@ -840,7 +840,7 @@ function AboutPanel() {
         <div className="about-section">
           <h3>隐私声明</h3>
           <p className="privacy-notice">
-            ContentCraft 完全在本地运行，不会收集或上传您的任何数据。
+            SayItBetter 完全在本地运行，不会收集或上传您的任何数据。
             所有 API 调用直接发送到您选择的 AI 提供商，我们不做任何中间处理。
             您的历史记录和配置信息仅保存在浏览器本地存储中。
           </p>

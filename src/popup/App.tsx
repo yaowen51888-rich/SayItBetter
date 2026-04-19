@@ -118,7 +118,7 @@ export function App() {
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M13 2L3 14H8L11 22L21 10H16L13 2Z" fill="currentColor"/>
             </svg>
-            <span>ContentCraft</span>
+            <span>SayItBetter</span>
           </div>
         </div>
 
@@ -127,7 +127,7 @@ export function App() {
           {!hasApiKey ? (
             <div className="setup-state">
               <div className="setup-icon">⚡</div>
-              <h2>欢迎使用 ContentCraft</h2>
+              <h2>欢迎使用 SayItBetter</h2>
               <p className="setup-description">配置 API Key 开始使用</p>
               <button onClick={openOptions} className="btn btn-primary">
                 前往设置

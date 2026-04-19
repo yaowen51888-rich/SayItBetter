@@ -1,4 +1,4 @@
-# ContentCraft AI
+# SayItBetter
 
 > 选中即用 AI 改写，一键生成社媒文案
 
@@ -7,11 +7,11 @@
 ## 截图
 
 <p align="center">
-  <img width="800" alt="ContentCraft AI 截图 1" src="https://github.com/user-attachments/assets/295dd600-5bdd-4ccf-9b85-aac224af96c5" />
-  <img width="800" alt="ContentCraft AI 截图 2" src="https://github.com/user-attachments/assets/6f4d820c-167a-4f33-81ac-c88d0a97d6c4" />
-  <img width="800" alt="ContentCraft AI 截图 3" src="https://github.com/user-attachments/assets/3b82d9ee-7b2e-4f05-ac6f-94cb3b62ad73" />
-  <img width="800" alt="ContentCraft AI 截图 4" src="https://github.com/user-attachments/assets/b899c5fc-a7f8-4eae-9831-063589df9281" />
-  <img width="800" alt="ContentCraft AI 截图 5" src="https://github.com/user-attachments/assets/4b9ed8a3-7104-4fef-8671-eb07c349e793" />
+  <img width="800" alt="SayItBetter 截图 1" src="https://github.com/user-attachments/assets/295dd600-5bdd-4ccf-9b85-aac224af96c5" />
+  <img width="800" alt="SayItBetter 截图 2" src="https://github.com/user-attachments/assets/6f4d820c-167a-4f33-81ac-c88d0a97d6c4" />
+  <img width="800" alt="SayItBetter 截图 3" src="https://github.com/user-attachments/assets/3b82d9ee-7b2e-4f05-ac6f-94cb3b62ad73" />
+  <img width="800" alt="SayItBetter 截图 4" src="https://github.com/user-attachments/assets/b899c5fc-a7f8-4eae-9831-063589df9281" />
+  <img width="800" alt="SayItBetter 截图 5" src="https://github.com/user-attachments/assets/4b9ed8a3-7104-4fef-8671-eb07c349e793" />
 </p>
 
 ## 功能特性
@@ -45,8 +45,8 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/your-username/content-craft-extension.git
-cd content-craft-extension
+git clone https://github.com/your-username/say-it-better.git
+cd say-it-better
 
 # 安装依赖
 npm install

@@ -1,6 +1,7 @@
 import { PLATFORMS, AI_PROVIDERS, type PlatformKey } from '../shared/constants'
 import type { AIOptions } from '../shared/types'
 import { StreamState } from '../shared/types'
+import { ensureHostPermission } from '../shared/host-permissions'
 import { fullHumanizePostProcess } from './humanize-postprocess'
 import { parseApiError } from '../shared/api-validator'
 import { getHumanizeConfig } from './config/humanize-config'
@@ -284,6 +285,12 @@ export class AIService {
     options: GenerateOptions = {},
     aiOptions: AIOptions = {}
   ): Promise<GenerateResult> {
+    // 确保有对应提供商的主机权限（optional_host_permissions 按需授权）
+    const hasPermission = await ensureHostPermission(provider)
+    if (!hasPermission) {
+      throw new Error(`需要授权访问 ${provider} 的 API 服务，请在弹出的权限请求中点击"允许"`)
+    }
+
     // 增加超时时间，考虑人性化处理的时间（主生成30秒 + 人性化20秒 = 50秒）
     const timeout = aiOptions.timeout || 50000
     const maxRetries = aiOptions.maxRetries || 2

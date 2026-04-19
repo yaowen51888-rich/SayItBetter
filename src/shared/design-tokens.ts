@@ -1,5 +1,5 @@
 /**
- * ContentCraft AI Design Tokens
+ * SayItBetter Design Tokens
  * 基于 OpenAI 设计语言的极简风格
  */
 

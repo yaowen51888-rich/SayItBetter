@@ -1,6 +1,6 @@
 import type { CacheEntry } from '../../shared/types'
 
-const DB_NAME = 'ContentCraftCache'
+const DB_NAME = 'SayItBetterCache'
 const DB_VERSION = 1
 const STORE_NAME = 'cache_entries'
 const STATS_STORAGE_KEY = 'cache_stats'

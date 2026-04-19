@@ -1,4 +1,5 @@
 import { StreamState } from '../shared/types'
+import { sanitizeHtml } from '../shared/sanitize'
 
 export class PopupInjector {
   private popupElement: HTMLElement | null = null
@@ -178,7 +179,7 @@ export class PopupInjector {
       console.log('[PopupInjector] 开始解析 Markdown...')
       const renderedHTML = parseMarkdown(this.generatedContent)
       console.log('[PopupInjector] Markdown 解析完成，HTML 长度:', renderedHTML.length)
-      this.currentResultElement.innerHTML = renderedHTML
+      this.currentResultElement.innerHTML = sanitizeHtml(renderedHTML)
       this.currentResultElement.style.color = '#1f2937'
       console.log('[PopupInjector] Markdown 渲染完成')
     } catch (error) {
@@ -714,7 +715,7 @@ export class PopupInjector {
     const header = document.createElement('div')
     header.className = 'contentcraft-header'
     header.innerHTML = `
-      <span class="contentcraft-title">ContentCraft AI</span>
+      <span class="contentcraft-title">SayItBetter</span>
       <button class="contentcraft-close">&times;</button>
     `
     container.appendChild(header)
